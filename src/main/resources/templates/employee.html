@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Information</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container mt-3">
+    <h1>Employee Information</h1>
+
+    <form method="get" th:action="@{/employee}">
+        <div class="form-group">
+            <label for="id">Enter Employee ID:</label>
+            <input type="text" class="form-control" id="id" name="id" th:value="${employee != null ? employee.id : ''}" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <hr>
+
+    <div th:if="${employee != null}">
+        <h2>Employee Details</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Salary</th>
+                <th>Annual Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.employeeName}"></td>
+                <td th:text="${employee.employeeAge}"></td>
+                <td th:text="${employee.employeeSalary}"></td>
+                <td th:text="${employee.employeeAnnualSalary}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${employees != null}">
+        <h2>Employee List</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Salary</th>
+                <th>Annual Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.employeeName}"></td>
+                <td th:text="${employee.employeeAge}"></td>
+                <td th:text="${employee.employeeSalary}"></td>
+                <td th:text="${employee.employeeAnnualSalary}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
